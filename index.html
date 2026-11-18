@@ -6,17 +6,23 @@
   <title>贪吃蛇大冒险 · Permainan Ular DELIMa</title>
   <style>
     :root {
-      --bg-top: #0b1120;
-      --bg-bottom: #16223a;
-      --panel: rgba(15, 23, 42, 0.88);
-      --border: rgba(56, 189, 248, 0.24);
-      --accent: #22c55e;
-      --accent-glow: rgba(34, 197, 94, 0.35);
-      --cyan: #38bdf8;
-      --gold: #fbbf24;
-      --danger: #f43f5e;
-      --text: #f8fafc;
-      --muted: #94a3b8;
+      --bg-page: #FAF9F5;
+      --bg-subtle: #F3F1EA;
+      --surface: #FFFFFF;
+      --surface-muted: #F7F5EE;
+      --border: #E5E1D8;
+      --border-strong: #D5D0C5;
+      --terracotta: #D97757;
+      --terracotta-hover: #C46141;
+      --terracotta-soft: #FBF0EC;
+      --sage: #2F6F4E;
+      --sage-soft: #EDF5F0;
+      --gold: #C7841C;
+      --danger: #C94A4A;
+      --text: #1F1E1D;
+      --muted: #6E6B64;
+      --serif: Georgia, "Noto Serif SC", "Songti SC", "STSong", serif;
+      --sans: "Inter", "Segoe UI", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
     }
 
     * {
@@ -32,9 +38,9 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: radial-gradient(circle at top, #1e293b 0%, var(--bg-top) 75%);
+      background: radial-gradient(circle at top, #FFFFFF 0%, var(--bg-page) 60%, var(--bg-subtle) 100%);
       color: var(--text);
-      font-family: "Segoe UI", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-family: var(--sans);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -56,18 +62,18 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      background: var(--panel);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 7px 12px;
-      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      padding: 8px 14px;
+      box-shadow: 0 1px 2px rgba(20, 20, 19, 0.04);
       flex-shrink: 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       min-width: 0;
     }
 
@@ -75,33 +81,36 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
+      background: var(--terracotta);
+      box-shadow: 0 0 0 3px var(--terracotta-soft);
       flex-shrink: 0;
     }
 
     .brand-title {
-      font-size: 14px;
+      font-family: var(--serif);
+      font-size: 15px;
       font-weight: 700;
+      color: var(--text);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.1px;
     }
 
     .stats {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       flex-shrink: 0;
     }
 
     .stat-pill {
-      background: rgba(30, 41, 59, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 8px;
-      padding: 3px 9px;
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 3px 10px;
       font-size: 12px;
+      color: var(--muted);
       display: flex;
       align-items: center;
       gap: 5px;
@@ -109,7 +118,7 @@
 
     .stat-pill strong {
       font-size: 14px;
-      color: var(--cyan);
+      color: var(--terracotta-hover);
       font-variant-numeric: tabular-nums;
     }
 
@@ -129,41 +138,49 @@
     .btn-group {
       display: flex;
       align-items: center;
-      gap: 4px;
-      background: var(--panel);
+      gap: 3px;
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 11px;
       padding: 3px;
+      box-shadow: 0 1px 2px rgba(20, 20, 19, 0.03);
     }
 
     button {
       font: inherit;
       cursor: pointer;
-      border: none;
+      border: 1px solid transparent;
       background: transparent;
       color: var(--muted);
-      border-radius: 7px;
+      border-radius: 8px;
       padding: 4px 9px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 500;
       transition: all 0.15s ease;
     }
 
     button:hover {
       color: var(--text);
-      background: rgba(148, 163, 184, 0.14);
+      background: var(--surface-muted);
     }
 
     button.active {
-      background: linear-gradient(135deg, #0ea5e9, #2563eb);
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.35);
+      background: var(--terracotta);
+      color: #FFFFFF;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(217, 119, 87, 0.28);
+    }
+
+    button.active:hover {
+      background: var(--terracotta-hover);
+      color: #FFFFFF;
     }
 
     button.toggle-on {
-      background: rgba(34, 197, 94, 0.2);
-      color: #4ade80;
-      border: 1px solid rgba(34, 197, 94, 0.45);
+      background: var(--sage-soft);
+      color: var(--sage);
+      border-color: rgba(47, 111, 78, 0.25);
+      font-weight: 600;
     }
 
     .board-wrap {
@@ -173,33 +190,33 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--panel);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 8px;
-      box-shadow: 0 12px 32px rgba(2, 6, 23, 0.55);
+      box-shadow: 0 2px 6px rgba(20, 20, 19, 0.04), 0 10px 26px rgba(20, 20, 19, 0.04);
       touch-action: none;
     }
 
     canvas {
       display: block;
-      border-radius: 10px;
-      background: #090f1d;
-      box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.14);
+      border-radius: 11px;
+      background: #FAF8F2;
+      box-shadow: inset 0 0 0 1px var(--border);
     }
 
     .overlay {
       position: absolute;
       inset: 8px;
-      border-radius: 10px;
-      background: rgba(9, 15, 29, 0.78);
-      backdrop-filter: blur(5px);
+      border-radius: 11px;
+      background: rgba(250, 249, 245, 0.88);
+      backdrop-filter: blur(6px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 18px;
+      padding: 20px;
       gap: 10px;
       transition: opacity 0.2s ease;
       z-index: 5;
@@ -212,51 +229,53 @@
 
     .overlay-badge {
       font-size: 11px;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.7px;
       text-transform: uppercase;
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 999px;
-      background: rgba(56, 189, 248, 0.16);
-      color: var(--cyan);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      font-weight: 700;
+      background: var(--terracotta-soft);
+      color: var(--terracotta-hover);
+      border: 1px solid rgba(217, 119, 87, 0.3);
+      font-weight: 600;
     }
 
     .overlay-badge.gameover {
-      background: rgba(244, 63, 94, 0.16);
-      color: #fb7185;
-      border-color: rgba(244, 63, 94, 0.35);
+      background: #FDF0F0;
+      color: var(--danger);
+      border-color: rgba(201, 74, 74, 0.28);
     }
 
     .overlay h2 {
       margin: 0;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.2px;
     }
 
     .overlay p {
       margin: 0;
       font-size: 13px;
       color: var(--muted);
-      max-width: 320px;
-      line-height: 1.5;
+      max-width: 330px;
+      line-height: 1.55;
     }
 
     .primary-btn {
-      margin-top: 4px;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #fff;
+      margin-top: 6px;
+      background: var(--terracotta);
+      color: #FFFFFF;
       font-size: 14px;
-      font-weight: 700;
-      padding: 9px 24px;
-      border-radius: 10px;
-      box-shadow: 0 4px 16px var(--accent-glow);
+      font-weight: 600;
+      padding: 10px 26px;
+      border-radius: 11px;
+      box-shadow: 0 2px 8px rgba(217, 119, 87, 0.32);
     }
 
     .primary-btn:hover {
-      background: linear-gradient(135deg, #4ade80, #22c55e);
-      color: #052e16;
+      background: var(--terracotta-hover);
+      color: #FFFFFF;
       transform: translateY(-1px);
     }
 
@@ -271,7 +290,7 @@
     .hint-text {
       font-size: 11px;
       color: var(--muted);
-      line-height: 1.35;
+      line-height: 1.4;
     }
 
     .dpad {
@@ -283,19 +302,27 @@
     }
 
     .dpad button {
-      background: rgba(30, 41, 59, 0.92);
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: var(--surface);
+      border: 1px solid var(--border);
       color: var(--text);
-      font-size: 14px;
+      font-size: 13px;
       padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 8px;
+      border-radius: 9px;
+      box-shadow: 0 1px 2px rgba(20, 20, 19, 0.06);
+    }
+
+    .dpad button:hover {
+      background: var(--surface-muted);
+      border-color: var(--border-strong);
     }
 
     .dpad button:active {
-      background: rgba(56, 189, 248, 0.3);
+      background: var(--terracotta-soft);
+      color: var(--terracotta-hover);
+      border-color: rgba(217, 119, 87, 0.45);
       transform: scale(0.95);
     }
 
@@ -705,57 +732,58 @@
       function draw(now) {
         ctx.clearRect(0, 0, boardPx, boardPx);
 
-        // 棋盘底色网格
+        // 棋盘底色网格（Claude 温暖纸感浅格）
         for (let y = 0; y < GRID; y++) {
           for (let x = 0; x < GRID; x++) {
-            ctx.fillStyle = (x + y) % 2 === 0 ? "#0d1629" : "#111c33";
+            ctx.fillStyle = (x + y) % 2 === 0 ? "#FAF8F2" : "#F2EFE6";
             ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
           }
         }
 
-        // 穿墙模式微光边框提示
+        // 穿墙模式虚线边框提示
         if (wrapWall) {
-          ctx.strokeStyle = "rgba(56, 189, 248, 0.35)";
+          ctx.strokeStyle = "rgba(217, 119, 87, 0.55)";
           ctx.lineWidth = 2;
           ctx.setLineDash([6, 6]);
           ctx.strokeRect(1, 1, boardPx - 2, boardPx - 2);
           ctx.setLineDash([]);
         }
 
-        // 食物（红苹果 + 呼吸光晕）
-        const pulse = 1 + Math.sin(now * 0.008) * 0.09;
+        // 食物（插画风暖红苹果）
+        const pulse = 1 + Math.sin(now * 0.008) * 0.08;
         const fx = (food.x + 0.5) * cellSize;
         const fy = (food.y + 0.5) * cellSize;
         const fr = cellSize * 0.36 * pulse;
         ctx.save();
-        ctx.shadowColor = "rgba(239, 68, 68, 0.7)";
-        ctx.shadowBlur = 12;
-        ctx.fillStyle = "#ef4444";
+        ctx.shadowColor = "rgba(201, 74, 74, 0.28)";
+        ctx.shadowBlur = 7;
+        ctx.shadowOffsetY = 2;
+        ctx.fillStyle = "#D9534F";
         ctx.beginPath();
         ctx.arc(fx, fy + 1, fr, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
         // 苹果叶子与高光
-        ctx.fillStyle = "#4ade80";
+        ctx.fillStyle = "#3D8B5E";
         ctx.beginPath();
         ctx.ellipse(fx + 2, fy - fr * 0.85, fr * 0.35, fr * 0.18, -0.5, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = "rgba(255,255,255,0.45)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.55)";
         ctx.beginPath();
-        ctx.arc(fx - fr * 0.32, fy - fr * 0.25, fr * 0.2, 0, Math.PI * 2);
+        ctx.arc(fx - fr * 0.3, fy - fr * 0.25, fr * 0.2, 0, Math.PI * 2);
         ctx.fill();
 
         // 金星加分道具
         if (bonus) {
           const bx = (bonus.x + 0.5) * cellSize;
           const by = (bonus.y + 0.5) * cellSize;
-          const br = cellSize * 0.42 * (1 + Math.sin(now * 0.015) * 0.14);
+          const br = cellSize * 0.42 * (1 + Math.sin(now * 0.015) * 0.12);
           ctx.save();
           ctx.translate(bx, by);
           ctx.rotate(now * 0.003);
-          ctx.shadowColor = "rgba(251, 191, 36, 0.85)";
-          ctx.shadowBlur = 14;
-          ctx.fillStyle = "#fbbf24";
+          ctx.shadowColor = "rgba(199, 132, 28, 0.35)";
+          ctx.shadowBlur = 8;
+          ctx.fillStyle = "#E09A2B";
           ctx.beginPath();
           for (let i = 0; i < 10; i++) {
             const rad = i % 2 === 0 ? br : br * 0.46;
@@ -768,7 +796,7 @@
           ctx.restore();
         }
 
-        // 蛇身绘制（由尾到头渐变）
+        // 蛇身绘制（鼠尾草森林绿渐变）
         const len = snake.length;
         for (let i = len - 1; i >= 0; i--) {
           const seg = snake[i];
@@ -781,17 +809,19 @@
 
           if (i === 0) {
             ctx.save();
-            ctx.shadowColor = "rgba(34, 197, 94, 0.55)";
-            ctx.shadowBlur = 10;
-            ctx.fillStyle = "#4ade80";
+            ctx.shadowColor = "rgba(47, 111, 78, 0.28)";
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetY = 2;
+            ctx.fillStyle = "#2F6F4E";
             roundRect(ctx, x, y, s, s, r);
             ctx.fill();
             ctx.restore();
             drawEyes(seg.x, seg.y, now);
           } else {
-            const g = Math.round(135 + ratio * 85);
-            const b = Math.round(80 + ratio * 55);
-            ctx.fillStyle = `rgb(22, ${g}, ${b})`;
+            const rv = Math.round(92 - ratio * 38);
+            const gv = Math.round(166 - ratio * 44);
+            const bv = Math.round(126 - ratio * 36);
+            ctx.fillStyle = `rgb(${rv}, ${gv}, ${bv})`;
             roundRect(ctx, x, y, s, s, r);
             ctx.fill();
           }
@@ -826,13 +856,13 @@
         const e1 = { x: cx + dir.x * offF - dir.y * offS, y: cy + dir.y * offF + dir.x * offS };
         const e2 = { x: cx + dir.x * offF + dir.y * offS, y: cy + dir.y * offF - dir.x * offS };
 
-        ctx.fillStyle = "#ffffff";
+        ctx.fillStyle = "#FFFFFF";
         ctx.beginPath();
         ctx.arc(e1.x, e1.y, er, 0, Math.PI * 2);
         ctx.arc(e2.x, e2.y, er, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.fillStyle = "#0f172a";
+        ctx.fillStyle = "#1F1E1D";
         ctx.beginPath();
         ctx.arc(e1.x + dir.x * 1.1, e1.y + dir.y * 1.1, er * 0.55, 0, Math.PI * 2);
         ctx.arc(e2.x + dir.x * 1.1, e2.y + dir.y * 1.1, er * 0.55, 0, Math.PI * 2);
@@ -842,7 +872,7 @@
         if (status === "playing" && Math.sin(now * 0.01) > 0.45) {
           const tx = cx + dir.x * (cellSize * 0.52);
           const ty = cy + dir.y * (cellSize * 0.52);
-          ctx.strokeStyle = "#fb7185";
+          ctx.strokeStyle = "#D9534F";
           ctx.lineWidth = 1.8;
           ctx.beginPath();
           ctx.moveTo(cx + dir.x * (cellSize * 0.38), cy + dir.y * (cellSize * 0.38));
