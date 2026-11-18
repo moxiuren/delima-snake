@@ -7,4 +7,4 @@
 - 键盘（方向键 / WASD / 空格暂停 / R 重开）、触屏划动、屏幕 D-Pad 全适配
 - 中英 / 马来文（BM）一键切换
 - 3 档速度（轻松 / 经典 / 极速）+ 穿墙模式开关 + Web Audio API 合成音效
-- 紧凑自适应布局，完美贴合 DELIMa Ruang Ilmu `<iframe>` 卡片尺寸
+- 温暖纸感浅色视觉风格（`#FAF9F5` 羊皮纸底色 + Georgia 衬线排版 + 赤陶暖橙主色），紧凑自适应贴合 DELIMa Ruang Ilmu `<iframe>` 卡片尺寸
